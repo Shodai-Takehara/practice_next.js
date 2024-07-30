@@ -36,3 +36,39 @@ export const getSortedPostsData = (): PostData[] => {
     }
   });
 };
+
+export const getAllPostIds = () => {
+  const fileNames = fs.readdirSync(postsDirectory);
+  /* つぎのような配列が返される:
+ [
+   {
+    params: {
+     id: 'ssg-ssr'
+    }
+   },
+   {
+    params: {
+     id: 'pre-rendering'
+    }
+   }
+ ] */
+  return fileNames.map((fileName) => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, ''),
+      },
+    };
+  });
+};
+
+export const getPostData = (id: string) => {
+  const fullPath = path.join(postsDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  // gray-matterで投稿ファイルのメタデータを取り出す
+  const matterResult = matter(fileContents);
+  // データにidを加える
+  return {
+    id,
+    ...matterResult.data,
+  };
+};
