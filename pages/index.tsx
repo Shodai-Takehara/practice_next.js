@@ -1,17 +1,15 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
+import Link from 'next/link';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
     <>
       <section>
         <h1>
-          Learn{" "}
-          <a href="https://nextjs.org/learn/foundations/about-nextjs?utm_source=next-site&utm_medium=nav-cta&utm_campaign=next-website">
-            Next.js!!!!
-          </a>
+          Read <Link href="/posts/first-post">this page!</Link>
         </h1>
         <p>
           Get started by editing <code>pages/index.js</code>
