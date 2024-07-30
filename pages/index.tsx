@@ -1,25 +1,25 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import { Inter } from 'next/font/google';
-import Link from 'next/link';
+// import Link from 'next/link';
 import Head from 'next/head';
+import Layout, { siteTitle } from '../components/layout';
+import utilStyles from '../styles/utils.module.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
-    <>
+    <Layout home={true}>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>{siteTitle}</title>
       </Head>
-      <section>
-        <h1>
-          Read <Link href="/posts/first-post">this page!</Link>
-        </h1>
+      <section className={utilStyles.headingMd}>
+        <p>[私はオギです。]</p>
         <p>
-          Get started by editing <code>pages/index.js</code>
+          (This is a sample website - you’ll be building a site like this on{' '}
+          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
-    </>
+    </Layout>
   );
 }
