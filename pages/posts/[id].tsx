@@ -3,6 +3,7 @@ import Head from 'next/head';
 import type { GetStaticProps } from 'next';
 import Layout from '../../components/layout';
 import { getAllPostIds, getPostData } from '../../lib/posts';
+import Date from '../../components/date';
 
 type PostData = {
   postData: {
@@ -42,7 +43,8 @@ const Post: FC<PostData> = ({ postData }) => {
       <br />
       {postData.id}
       <br />
-      {postData.date}
+      {/* {postData.date} */}
+      <Date dateString={postData.date} />
       <br />
       <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
     </Layout>
