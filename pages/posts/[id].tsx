@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // params.idを用いてブログ投稿のデータを取り出す
-  const postData = getPostData(params?.id as string);
+  const postData = await getPostData(params?.id as string);
   return {
     props: {
       postData,
@@ -39,6 +39,8 @@ const Post: FC<PostData> = ({ postData }) => {
       {postData.id}
       <br />
       {postData.date}
+      <br />
+      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
     </Layout>
   );
 };

@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
@@ -61,14 +63,20 @@ export const getAllPostIds = () => {
   });
 };
 
-export const getPostData = (id: string) => {
+export const getPostData = async (id: string) => {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   // gray-matterで投稿ファイルのメタデータを取り出す
   const matterResult = matter(fileContents);
-  // データにidを加える
+  // remarkを使ってマークダウンをHTML文字列に変換する
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content);
+  const contentHtml = processedContent.toString();
+  // データにid, contentを加える
   return {
     id,
+    contentHtml,
     ...matterResult.data,
   };
 };
