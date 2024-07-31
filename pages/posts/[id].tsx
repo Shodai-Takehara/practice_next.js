@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import Head from 'next/head';
 import type { GetStaticProps } from 'next';
 import Layout from '../../components/layout';
 import { getAllPostIds, getPostData } from '../../lib/posts';
@@ -34,6 +35,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const Post: FC<PostData> = ({ postData }) => {
   return (
     <Layout>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
       {postData.title}
       <br />
       {postData.id}
